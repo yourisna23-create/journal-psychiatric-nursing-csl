@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="numeric" default-locale="en-US" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>Journal of Psychiatric Nursing (phdergi.org) - Custom</title>
+    <title-short>J Psychiatric Nurs Custom</title-short>
+    <id>http://www.zotero.org/styles/journal-of-psychiatric-nursing-phdergi-custom</id>
+    <link href="http://www.zotero.org/styles/journal-of-psychiatric-nursing-phdergi-custom" rel="self"/>
+    <link href="https://phdergi.org/Instructions-for-Authors" rel="documentation"/>
+    <category citation-format="numeric"/>
+    <category field="nursing"/>
+    <summary>Numeric citations in superscript square brackets; bibliography numbered in citation order; journal authors listed up to five, then et al. (when more than five).</summary>
+    <updated>2026-11-18T00:00:00+00:00</updated>
+  </info>
+  <macro name="author">
+    <names variable="author" delimiter=", ">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", " et-al-min="6" et-al-use-first="5"/>
+      <et-al term="et-al"/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names variable="editor">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", " et-al-min="6" et-al-use-first="5"/>
+      <label form="short" prefix=", "/>
+    </names>
+  </macro>
+  <macro name="title">
+    <text variable="title"/>
+  </macro>
+  <macro name="journal">
+    <choose>
+      <if variable="container-title-short">
+        <text variable="container-title-short"/>
+      </if>
+      <else>
+        <text variable="container-title" form="short"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="issued">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+  <macro name="pages">
+    <choose>
+      <if variable="page">
+        <text variable="page"/>
+      </if>
+      <else-if variable="article-number">
+        <text variable="article-number"/>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="journal-details">
+    <group delimiter=";">
+      <text macro="journal"/>
+      <group delimiter="">
+        <text macro="issued"/>
+        <group delimiter="">
+          <text variable="volume" prefix=";"/>
+          <text variable="issue" prefix="(" suffix=")"/>
+          <text macro="pages" prefix=":"/>
+        </group>
+      </group>
+    </group>
+  </macro>
+  <macro name="publisher-details">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout vertical-align="sup" prefix="[" suffix="]" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <bibliography entry-spacing="0" line-spacing="1">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal article-magazine article-newspaper" match="any">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="title"/>
+            <group delimiter=" ">
+              <text macro="journal"/>
+              <group delimiter="">
+                <text macro="issued"/>
+                <text variable="volume" prefix=";"/>
+                <text variable="issue" prefix="(" suffix=")"/>
+                <text macro="pages" prefix=":"/>
+              </group>
+            </group>
+          </group>
+        </if>
+        <else-if type="chapter paper-conference" match="any">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="title"/>
+            <group delimiter=" ">
+              <text value="In:"/>
+              <text macro="editor" suffix="."/>
+              <text variable="container-title"/>
+            </group>
+            <group delimiter="; ">
+              <text macro="publisher-details"/>
+              <text macro="issued"/>
+            </group>
+            <text macro="pages" prefix="p. "/>
+          </group>
+        </else-if>
+        <else-if type="book report thesis" match="any">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="title"/>
+            <text variable="edition" suffix=" ed"/>
+            <group delimiter="; ">
+              <text macro="publisher-details"/>
+              <text macro="issued"/>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="title"/>
+            <text macro="journal"/>
+            <text macro="issued"/>
+            <text variable="URL"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
